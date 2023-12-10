@@ -6,10 +6,12 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { TransactionService } from './transaction.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
+import { FindByDateTransactionDto } from './dto/findByDate-transaction.dto';
 
 @Controller('transaction')
 export class TransactionController {
@@ -23,6 +25,11 @@ export class TransactionController {
   @Get()
   findAll() {
     return this.transactionService.findAll();
+  }
+
+  @Get('date')
+  findByDate(@Query() findByDateTransactionsDto: FindByDateTransactionDto) {
+    return this.transactionService.findByDate(findByDateTransactionsDto);
   }
 
   @Get(':id')
