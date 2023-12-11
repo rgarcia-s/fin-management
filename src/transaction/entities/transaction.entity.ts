@@ -1,5 +1,6 @@
 import { Category } from 'src/category/entities/category.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { TransactionTypeEnum } from '../enums/transactionType.enum';
 
 @Entity()
 export class Transaction {
@@ -21,6 +22,9 @@ export class Transaction {
 
   @Column({ type: 'money' })
   value: number;
+
+  @Column({ type: 'varchar' })
+  type: TransactionTypeEnum;
 
   @Column({ type: 'boolean' })
   isRecurrent: boolean;

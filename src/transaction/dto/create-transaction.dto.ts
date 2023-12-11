@@ -1,11 +1,14 @@
 import {
   IsBoolean,
   IsDateString,
+  IsEnum,
   IsNumber,
   IsPositive,
   IsString,
+  Length,
   ValidateIf,
 } from 'class-validator';
+import { TransactionTypeEnum } from '../enums/transactionType.enum';
 
 export class CreateTransactionDto {
   @IsString()
@@ -15,11 +18,15 @@ export class CreateTransactionDto {
   description: string;
 
   @IsString()
+  @Length(3, 30)
   categoryName: string;
 
   @IsNumber()
   @IsPositive()
   value: number;
+
+  @IsEnum(TransactionTypeEnum)
+  type: TransactionTypeEnum;
 
   @IsBoolean()
   isRecurrent: boolean;

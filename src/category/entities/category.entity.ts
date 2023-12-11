@@ -8,7 +8,7 @@ export class Category {
 
   @Column({
     type: 'varchar',
-    length: 255,
+    length: 30,
     transformer: {
       to: (value: string) => value.charAt(0).toUpperCase() + value.slice(1),
       from: (value) => value,

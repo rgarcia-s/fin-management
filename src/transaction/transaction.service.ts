@@ -3,7 +3,7 @@ import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Transaction } from './entities/transaction.entity';
-import { Between, MoreThanOrEqual, Repository } from 'typeorm';
+import { Between, Repository } from 'typeorm';
 import { Category } from 'src/category/entities/category.entity';
 import { FindByDateTransactionDto } from './dto/findByDate-transaction.dto';
 
