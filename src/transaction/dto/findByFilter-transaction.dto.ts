@@ -1,4 +1,10 @@
-import { IsDateString, IsEnum, ValidateIf } from 'class-validator';
+import {
+  IsDateString,
+  IsEnum,
+  IsOptional,
+  IsUUID,
+  ValidateIf,
+} from 'class-validator';
 import { TransactionTypeEnum } from '../enums/transactionType.enum';
 
 export class FindByFilterTransactionDto {
@@ -11,6 +17,10 @@ export class FindByFilterTransactionDto {
   endDate: Date = new Date();
 
   @IsEnum(TransactionTypeEnum)
-  @ValidateIf((dto) => typeof dto.type === 'string')
+  @IsOptional()
   type: TransactionTypeEnum;
+
+  @IsUUID()
+  @IsOptional()
+  category: string;
 }

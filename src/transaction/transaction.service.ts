@@ -54,6 +54,10 @@ export class TransactionService {
       filter.type = findByFilterTransactionsDto.type;
     }
 
+    if (findByFilterTransactionsDto.category) {
+      filter.category = { id: findByFilterTransactionsDto.category };
+    }
+
     return this.transactionsRepository.find({
       where: filter,
     });
