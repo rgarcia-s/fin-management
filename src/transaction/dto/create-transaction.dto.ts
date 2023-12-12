@@ -34,11 +34,13 @@ export class CreateTransactionDto {
   @IsBoolean()
   isInInstallments: boolean;
 
-  @IsBoolean()
+  @IsNumber()
+  @IsPositive()
   @ValidateIf((transaction) => transaction.isInInstallments !== false)
   installments?: number;
 
-  @IsBoolean()
+  @IsNumber()
+  @IsPositive()
   @ValidateIf((transaction) => transaction.isInInstallments !== false)
   currentInstallment?: number;
 

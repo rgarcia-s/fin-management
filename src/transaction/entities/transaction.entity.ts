@@ -32,10 +32,10 @@ export class Transaction {
   @Column({ type: 'boolean' })
   isInInstallments: boolean;
 
-  @Column({ type: 'integer', nullable: true })
+  @Column({ type: 'integer', default: 1 })
   installments?: number;
 
-  @Column({ type: 'integer', nullable: true })
+  @Column({ type: 'integer', default: 1 })
   currentInstallment?: number;
 
   @Column({ type: 'date' })

@@ -3,9 +3,10 @@ import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Transaction } from './entities/transaction.entity';
-import { Between, Repository } from 'typeorm';
+import { Between, FindOptionsWhere, In, Like, Repository } from 'typeorm';
 import { Category } from 'src/category/entities/category.entity';
-import { FindByDateTransactionDto } from './dto/findByDate-transaction.dto';
+import { FindByFilterTransactionDto } from './dto/findByFilter-transaction.dto';
+import { TransactionTypeEnum } from './enums/transactionType.enum';
 
 @Injectable()
 export class TransactionService {
@@ -41,14 +42,20 @@ export class TransactionService {
     return this.transactionsRepository.findOneBy({ id });
   }
 
-  async findByDate(findByDateTransactionsDto: FindByDateTransactionDto) {
+  async findByFilter(findByFilterTransactionsDto: FindByFilterTransactionDto) {
+    const filter: FindOptionsWhere<Transaction> = {
+      date: Between(
+        findByFilterTransactionsDto.startDate,
+        findByFilterTransactionsDto.endDate,
+      ),
+    };
+
+    if (findByFilterTransactionsDto.type) {
+      filter.type = findByFilterTransactionsDto.type;
+    }
+
     return this.transactionsRepository.find({
-      where: {
-        date: Between(
-          findByDateTransactionsDto.startDate,
-          findByDateTransactionsDto.endDate,
-        ),
-      },
+      where: filter,
     });
   }
 

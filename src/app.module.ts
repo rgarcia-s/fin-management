@@ -4,16 +4,19 @@ import { AppService } from './app.service';
 import { TransactionModule } from './transaction/transaction.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CategoryModule } from './category/category.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
+      host: process.env.PGHOST,
       port: 5432,
-      username: 'postgres',
-      password: '123456',
-      database: 'postgres',
+      username: process.env.PGUSER,
+      password: process.env.PGPASSWORD,
+      database: process.env.PGDATABASE,
+      ssl: true,
       autoLoadEntities: true,
       synchronize: true,
       logging: true,

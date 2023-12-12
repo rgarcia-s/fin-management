@@ -7,11 +7,12 @@ import {
   Param,
   Delete,
   Query,
+  ValidationPipe,
 } from '@nestjs/common';
 import { TransactionService } from './transaction.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
-import { FindByDateTransactionDto } from './dto/findByDate-transaction.dto';
+import { FindByFilterTransactionDto } from './dto/findByFilter-transaction.dto';
 
 @Controller('transaction')
 export class TransactionController {
@@ -27,9 +28,12 @@ export class TransactionController {
     return this.transactionService.findAll();
   }
 
-  @Get('date')
-  findByDate(@Query() findByDateTransactionsDto: FindByDateTransactionDto) {
-    return this.transactionService.findByDate(findByDateTransactionsDto);
+  @Get('filter')
+  findByFilter(
+    @Query(new ValidationPipe({ transform: true }))
+    findByFilterTransactionsDto: FindByFilterTransactionDto,
+  ) {
+    return this.transactionService.findByFilter(findByFilterTransactionsDto);
   }
 
   @Get(':id')
