@@ -57,6 +57,10 @@ export class TransactionService {
       filter.category = { id: findByFilterTransactionsDto.category };
     }
 
+    if (findByFilterTransactionsDto.isRecurrent !== undefined) {
+      filter.isRecurrent = findByFilterTransactionsDto.isRecurrent;
+    }
+
     return this.transactionsRepository.find({
       where: filter,
     });

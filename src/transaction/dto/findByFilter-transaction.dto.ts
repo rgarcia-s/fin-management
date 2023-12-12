@@ -1,11 +1,14 @@
 import {
+  IsBoolean,
   IsDateString,
   IsEnum,
   IsOptional,
+  IsString,
   IsUUID,
   ValidateIf,
 } from 'class-validator';
 import { TransactionTypeEnum } from '../enums/transactionType.enum';
+import { Transform } from 'class-transformer';
 
 export class FindByFilterTransactionDto {
   @IsDateString()
@@ -23,4 +26,11 @@ export class FindByFilterTransactionDto {
   @IsUUID()
   @IsOptional()
   category: string;
+
+  @Transform(({ value }) =>
+    value === 'true' ? true : value === 'false' ? false : 'invalid',
+  )
+  @IsBoolean()
+  @IsOptional()
+  isRecurrent: boolean;
 }
