@@ -3,10 +3,9 @@ import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { UpdateTransactionDto } from './dto/update-transaction.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Transaction } from './entities/transaction.entity';
-import { Between, FindOptionsWhere, In, Like, Repository } from 'typeorm';
+import { Between, FindOptionsWhere, Repository } from 'typeorm';
 import { Category } from 'src/category/entities/category.entity';
 import { FindByFilterTransactionDto } from './dto/findByFilter-transaction.dto';
-import { TransactionTypeEnum } from './enums/transactionType.enum';
 
 @Injectable()
 export class TransactionService {
